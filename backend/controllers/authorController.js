@@ -111,7 +111,7 @@ exports.author_delete_get = function(req, res, next) {
         if (results.author==null) { // No results.
             res.redirect('/catalog/authors');
         }
-        // Successful, so render.
+      //Successful, so send json
     res.json( results.author );
     });
 
@@ -131,7 +131,7 @@ exports.author_delete_post = function(req, res, next) {
         if (err) { return next(err); }
         // Success
         if (results.authors_books.length > 0) {
-            // Author has books. Render in same way as for GET route.
+            // Author has books. So send json.
             res.json( results.author );
             return;
         }
@@ -183,7 +183,7 @@ exports.author_update_post = [
          const errors = validationResult(req);
 
          if (!errors.isEmpty()) {
-             // There are errors. Render form again with sanitized values/errors messages.
+             // There are errors.
              res.json ( errors.array() );
              return;
          }
