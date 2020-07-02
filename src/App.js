@@ -23,17 +23,19 @@ function App() {
         <div className="container-fluid">
             <div class="row">
                 <SideNavbar />
-                <br/>
-                <Route path="/" exact component={Home} />
-                <Route path="/catalog" exact component={Home} />
-                <Route path="/catalog/authors" component={AuthorList} />
-                <Route path="/catalog/author/create" component={CreateAuthor} />
-                <Route path="/catalog/books" component={BookList} />
-                <Route path="/catalog/book/create" component={CreateBook} />
-                <Route path="/catalog/bookinstances" component={BookInstanceList} />
-                <Route path="/catalog/bookinstance/create" component={CreateBookInstance} />
-                <Route path="/catalog/genres" component={GenreList} />
-                <Route path="/catalog/genre/create" component={CreateGenre} />
+                <div class="col-sm-9">
+                    <br/>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/catalog" exact component={Home} />
+                    <Route path="/catalog/authors" component={AuthorList} />
+                    <Route path="/catalog/author/create" component={CreateAuthor} />
+                    <Route path="/catalog/books" component={BookList} />
+                    <Route path="/catalog/book/create" component={CreateBook} />
+                    <Route path="/catalog/bookinstances" component={BookInstanceList} />
+                    <Route path="/catalog/bookinstance/create" component={CreateBookInstance} />
+                    <Route path="/catalog/genres" component={GenreList} />
+                    <Route path="/catalog/genre/create" component={CreateGenre} />
+                </div>
             </div>
          </div>
      </div>

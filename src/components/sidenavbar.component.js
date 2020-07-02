@@ -14,7 +14,7 @@ export default class SideNavbar extends Component {
                         <Link to="/catalog/bookinstances" className="nav-link">All book-instances</Link>
                     </ul>
                     <ul class="vertical-menu">
-                        <Link to="/catalog/books/create" className="nav-link">Create new book</Link>
+                        <Link to="/catalog/book/create" className="nav-link">Create new book</Link>
                         <Link to="/catalog/author/create" className="nav-link">Create new author</Link>
                         <Link to="/catalog/genre/create" className="nav-link">Create new genre</Link>
                         <Link to="/catalog/bookinstance/create" className="nav-link">Create new bookinstance</Link>
