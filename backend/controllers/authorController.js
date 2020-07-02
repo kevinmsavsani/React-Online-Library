@@ -1,8 +1,21 @@
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+var async = require('async');
+var Book = require('../models/book');
 var Author = require('../models/author');
 
 // Display list of all Authors.
-exports.author_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author list');
+exports.author_list = function(req, res, next) {
+
+  Author.find()
+    .populate('author')
+    .sort([['family_name', 'ascending']])
+    .exec(function (err, list_authors) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.json ( list_authors );
+    });
+
 };
 
 // Display detail page for a specific Author.
@@ -38,4 +51,4 @@ exports.author_update_get = function(req, res) {
 // Handle Author update on POST.
 exports.author_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Author update POST');
-}; 
+};
