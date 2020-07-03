@@ -20,7 +20,9 @@ export default class UpdateBook extends Component {
        genre: '',
        isbn:'',
        authors: [],
-       genres: []
+       genres: [],
+       authorid: [],
+       genreid: []
      };
    }
 
@@ -29,10 +31,12 @@ export default class UpdateBook extends Component {
        .then(response => {
          if (response.data.length > 0) {
            this.setState({
-             authors: response.data.map(author => author._id),
-             author: response.data[0]._id
+             authors: response.data.map(author => author.name),
+             authorid: response.data.map(author => author._id),
+             author: response.data[0].name
            });
          }
+
        })
        .catch((error) => {
          console.log(error);
@@ -42,8 +46,9 @@ export default class UpdateBook extends Component {
             .then(response => {
               if (response.data.length > 0) {
                 this.setState({
-                  genres: response.data.map(genre => genre._id),
-                  genre: response.data[0]._id
+                  genres: response.data.map(genre => genre.name),
+                  genreid: response.data.map(genre => genre._id),
+                  genre: response.data[0].name
                 });
               }
             })
@@ -86,11 +91,11 @@ export default class UpdateBook extends Component {
      e.preventDefault();
 
      const book = {
-       author: this.state.author,
+       author: this.state.authorid[this.state.authors.indexOf(this.state.author)],
        title: this.state.title,
        summary: this.state.summary,
        isbn: this.state.isbn,
-       genre: this.state.genre
+       genre: this.state.genreid[this.state.genres.indexOf(this.state.genre)]
      }
 
      console.log(book);
