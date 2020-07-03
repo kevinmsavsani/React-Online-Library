@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 export default class UpdateGenre extends Component {
@@ -23,10 +24,13 @@ export default class UpdateGenre extends Component {
     e.preventDefault();
 
     const genre = {
-      Genre: this.state.Genre
+      name: this.state.Genre
     }
 
     console.log(genre);
+
+    axios.post('http://localhost:5000/catalog/genre/create', genre)
+      .then(res => console.log(res.data));
 
     this.setState({
       Genre: ''
