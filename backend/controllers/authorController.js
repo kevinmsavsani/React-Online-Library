@@ -1,7 +1,5 @@
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-const validator = require('express-validator');
-
 var async = require('async');
 var Book = require('../models/book');
 var Author = require('../models/author');
@@ -54,7 +52,7 @@ exports.author_create_get = function(req, res, next) {
 exports.author_create_post = [
 
     // Validate fields.
-    validator.body('name', 'Author name required').trim().isLength({ min: 1 }),
+    body('name').isLength({ min: 1 }).trim().withMessage('Name must be specified.'),
     body('date_of_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
     body('date_of_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601(),
 

@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class UpdateBook extends Component {
     constructor(props) {
@@ -18,8 +19,37 @@ export default class UpdateBook extends Component {
        summary: '',
        genre: '',
        isbn:'',
-       users: []
+       authors: [],
+       genres: []
      };
+   }
+
+   componentDidMount() {
+     axios.get('http://localhost:5000/catalog/authors')
+       .then(response => {
+         if (response.data.length > 0) {
+           this.setState({
+             authors: response.data.map(author => author.name),
+             author: response.data[0].name
+           });
+         }
+       })
+       .catch((error) => {
+         console.log(error);
+       })
+
+     axios.get('http://localhost:5000/catalog/genres')
+            .then(response => {
+              if (response.data.length > 0) {
+                this.setState({
+                  genres: response.data.map(genre => genre.name),
+                  genre: response.data[0].name
+                });
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            })
    }
 
    onChangeAuthor(e){
@@ -65,6 +95,9 @@ export default class UpdateBook extends Component {
 
      console.log(book);
 
+    axios.post('http://localhost:5000/catalog/book/create', book)
+      .then(res => console.log(res.data));
+
      window.location = '/catalog/books';
    }
 
@@ -90,10 +123,10 @@ export default class UpdateBook extends Component {
                value={this.state.author}
                onChange={this.onChangeAuthor}>
                {
-                 this.state.users.map(function(user) {
+                 this.state.authors.map(function(author) {
                    return <option
-                     key={user}
-                     value={user}>{user}
+                     key={author}
+                     value={author}>{author}
                      </option>;
                  })
                }
@@ -126,10 +159,10 @@ export default class UpdateBook extends Component {
                    value={this.state.genre}
                    onChange={this.onChangeGenre}>
                    {
-                     this.state.users.map(function(user) {
+                     this.state.genres.map(function(genre) {
                        return <option
-                         key={user}
-                         value={user}>{user}
+                         key={genre}
+                         value={genre}>{genre}
                          </option>;
                      })
                    }

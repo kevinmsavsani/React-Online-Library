@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 const uri = 'mongodb+srv://kevin:z6Z2K1djNsGGtRmW@cluster0-ph5lo.mongodb.net/local_library?retryWrites=true&w=majority';
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
