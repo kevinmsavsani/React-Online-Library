@@ -65,13 +65,13 @@ export default class UpdateBook extends Component {
 
      console.log(book);
 
-     window.location = '/';
+     window.location = '/catalog/books';
    }
 
    render() {
      return (
      <div>
-       <h3>Add Author</h3>
+       <h3>Add Book</h3>
        <form onSubmit={this.onSubmit}>
            <div className="form-group">
              <label>Title: </label>

@@ -7,22 +7,22 @@ export default class UpdateAuthor extends Component {
     constructor(props) {
      super(props);
 
-     this.onChangeUsername = this.onChangeUsername.bind(this);
+     this.onChangeAuthor = this.onChangeAuthor.bind(this);
      this.onChangeBirthDate = this.onChangeBirthDate.bind(this);
      this.onChangeDeathDate = this.onChangeDeathDate.bind(this);
      this.onSubmit = this.onSubmit.bind(this);
 
      this.state = {
-       username: '',
+       author: '',
        birthDate: new Date(),
        deathDate: new Date(),
        users: []
      };
    }
 
-   onChangeUsername(e){
+   onChangeAuthor(e){
      this.setState({
-       username: e.target.value
+       author: e.target.value
      })
    }
 
@@ -42,14 +42,14 @@ export default class UpdateAuthor extends Component {
      e.preventDefault();
 
      const author = {
-       username: this.state.username,
+       author: this.state.author,
        birthDate: this.state.birthDate,
        deathDate: this.state.deathDate
      }
 
      console.log(author);
 
-     window.location = '/';
+     window.location = '/catalog/authors';
    }
 
    render() {
@@ -58,22 +58,14 @@ export default class UpdateAuthor extends Component {
        <h3>Add Author</h3>
        <form onSubmit={this.onSubmit}>
          <div className="form-group">
-           <label>Username: </label>
-           <select ref="userInput"
-               required
-               className="form-control"
-               value={this.state.username}
-               onChange={this.onChangeUsername}>
-               {
-                 this.state.users.map(function(user) {
-                   return <option
-                     key={user}
-                     value={user}>{user}
-                     </option>;
-                 })
-               }
-           </select>
-         </div>
+          <label>Author Name: </label>
+          <input  type="text"
+              required
+              className="form-control"
+              value={this.state.author}
+              onChange={this.onChangeAuthor}
+              />
+        </div>
          <div className="form-group">
            <label>Birth Date: </label>
            <div>

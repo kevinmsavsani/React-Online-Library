@@ -31,6 +31,9 @@ export default class UpdateGenre extends Component {
     this.setState({
       Genre: ''
     })
+
+    window.location = '/catalog/genres';
+
   }
 
   render() {
