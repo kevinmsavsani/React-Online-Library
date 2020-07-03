@@ -29,8 +29,8 @@ export default class UpdateBook extends Component {
        .then(response => {
          if (response.data.length > 0) {
            this.setState({
-             authors: response.data.map(author => author.name),
-             author: response.data[0].name
+             authors: response.data.map(author => author._id),
+             author: response.data[0]._id
            });
          }
        })
@@ -42,8 +42,8 @@ export default class UpdateBook extends Component {
             .then(response => {
               if (response.data.length > 0) {
                 this.setState({
-                  genres: response.data.map(genre => genre.name),
-                  genre: response.data[0].name
+                  genres: response.data.map(genre => genre._id),
+                  genre: response.data[0]._id
                 });
               }
             })
