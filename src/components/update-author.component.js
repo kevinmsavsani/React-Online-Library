@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import axios from 'axios';
  import DatePicker from 'react-datepicker';
  import "react-datepicker/dist/react-datepicker.css";
 
@@ -42,12 +43,15 @@ export default class UpdateAuthor extends Component {
      e.preventDefault();
 
      const author = {
-       author: this.state.author,
-       birthDate: this.state.birthDate,
-       deathDate: this.state.deathDate
+       name: this.state.author,
+       date_of_birth: this.state.birthDate,
+       date_of_death: this.state.deathDate
      }
 
      console.log(author);
+
+     axios.post('http://localhost:5000/catalog/author/create', author)
+       .then(res => console.log(res.data));
 
      window.location = '/catalog/authors';
    }

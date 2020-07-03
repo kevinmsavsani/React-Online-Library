@@ -1,5 +1,7 @@
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+const validator = require('express-validator');
+
 var async = require('async');
 var Book = require('../models/book');
 var Author = require('../models/author');
@@ -52,16 +54,12 @@ exports.author_create_get = function(req, res, next) {
 exports.author_create_post = [
 
     // Validate fields.
-    body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
-        .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-    body('family_name').isLength({ min: 1 }).trim().withMessage('Family name must be specified.')
-        .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
+    validator.body('name', 'Author name required').trim().isLength({ min: 1 }),
     body('date_of_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
     body('date_of_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601(),
 
     // Sanitize fields.
-    sanitizeBody('first_name').escape(),
-    sanitizeBody('family_name').escape(),
+    sanitizeBody('name').escape(),
     sanitizeBody('date_of_birth').toDate(),
     sanitizeBody('date_of_death').toDate(),
 
@@ -82,8 +80,7 @@ exports.author_create_post = [
             // Create an Author object with escaped and trimmed data.
             var author = new Author(
                 {
-                    first_name: req.body.first_name,
-                    family_name: req.body.family_name,
+                    name: req.body.name,
                     date_of_birth: req.body.date_of_birth,
                     date_of_death: req.body.date_of_death
                 });
@@ -163,16 +160,13 @@ exports.author_update_get = function(req, res) {
 exports.author_update_post = [
 
      // Validate fields.
-     body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
-         .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-     body('family_name').isLength({ min: 1 }).trim().withMessage('Family name must be specified.')
-         .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
+     body('name').isLength({ min: 1 }).trim().withMessage('Name must be specified.')
+         .isAlphanumeric().withMessage('Name has non-alphanumeric characters.'),
      body('date_of_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
      body('date_of_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601(),
 
      // Sanitize fields.
-     sanitizeBody('first_name').escape(),
-     sanitizeBody('family_name').escape(),
+     sanitizeBody('name').escape(),
      sanitizeBody('date_of_birth').toDate(),
      sanitizeBody('date_of_death').toDate(),
 
@@ -193,8 +187,7 @@ exports.author_update_post = [
              // Create an Author object with escaped and trimmed data.
              var author = new Author(
                  {
-                     first_name: req.body.first_name,
-                     family_name: req.body.family_name,
+                     name: req.body.name,
                      date_of_birth: req.body.date_of_birth,
                      date_of_death: req.body.date_of_death,
                      _id: req.params.id
