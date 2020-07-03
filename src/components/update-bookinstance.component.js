@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-
+import axios from 'axios';
  import DatePicker from 'react-datepicker';
  import "react-datepicker/dist/react-datepicker.css";
 
@@ -19,15 +19,30 @@ export default class UpdateBookInstance extends Component {
        book: '',
        imprint: '',
        status: '',
-       date:new Date(),
-       statusName: [],
-       books: []
+       date: new Date(),
+       statusName: ['Available', 'Maintenance', 'Loaned', 'Reserved'],
+       books: [],
+       bookid: []
      };
    }
 
    componentDidMount() {
+        axios.get('http://localhost:5000/catalog/books')
+          .then(response => {
+            if (response.data.length > 0) {
+              this.setState({
+                books: response.data.map(book => book.title),
+                bookid: response.data.map(book => book._id),
+                author: response.data[0].name
+              });
+            }
+
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+
      this.setState({
-       statusName: ['Available', 'Maintenance', 'Loaned', 'Reserved'],
        status: 'Maintenance'
      });
    }
@@ -60,12 +75,13 @@ export default class UpdateBookInstance extends Component {
      e.preventDefault();
 
      const bookInstance = {
-       book: this.state.book,
+       book: this.state.bookid[this.state.books.indexOf(this.state.book)],
        imprint: this.state.imprint,
-       date: this.state.date,
+       due_back: this.state.date,
        status: this.state.status
      }
-
+     axios.post('http://localhost:5000/catalog/bookinstance/create', bookInstance)
+          .then(res => console.log(res.data));
      console.log(bookInstance);
 
      window.location = '/catalog/bookinstances';
