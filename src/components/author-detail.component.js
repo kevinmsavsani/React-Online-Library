@@ -4,9 +4,7 @@ import axios from 'axios';
 
 const Author = props => (
   <tr>
-    <td>
-        <Link to={"/catalog/author/"+props.author._id}>{props.author.name}</Link>
-    </td>
+    <td>{props.author.name}</td>
     <td>{props.author.date_of_birth}</td>
     <td>{props.author.date_of_death}</td>
     <td>
@@ -15,44 +13,28 @@ const Author = props => (
   </tr>
 )
 
-export default class AuthorList extends Component {
+export default class AuthorDetail extends Component {
   constructor(props) {
     super(props);
 
-    this.deleteAuthor = this.deleteAuthor.bind(this)
 
-    this.state = {authors: []};
+    this.state = {author: {}};
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/catalog/authors')
+    axios.get('http://localhost:5000/catalog/author/' + this.props.match.params.id)
       .then(response => {
-        this.setState({ authors: response.data })
+        this.setState({ author: response.data })
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
-  deleteAuthor(id) {
-    axios.delete('http://localhost:5000/authors/'+id)
-      .then(response => { console.log(response.data)});
-
-    this.setState({
-      authors: this.state.authors.filter(el => el._id !== id)
-    })
-  }
-
-  authorList() {
-    return this.state.authors.map(currentauthor => {
-      return <Author author={currentauthor} deleteAuthor={this.deleteAuthor} key={currentauthor._id}/>;
-    })
-  }
-
   render() {
     return (
       <div>
-        <h3>Logged Authors</h3>
+        <h3>{this.state.author.name}</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
@@ -63,7 +45,7 @@ export default class AuthorList extends Component {
             </tr>
           </thead>
           <tbody>
-            { this.authorList() }
+            <Author author={this.state.author} key={this.state.author._id}/>
           </tbody>
         </table>
       </div>

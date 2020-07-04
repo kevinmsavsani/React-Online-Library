@@ -27,9 +27,9 @@ exports.author_detail = function(req, res, next) {
               .exec(callback)
         },
         authors_books: function(callback) {
-          Book.find({ 'author': req.params.id },'title summary')
+          Book.find({ 'author': req.params.id })
           .exec(callback)
-        },
+        }
     }, function(err, results) {
         if (err) { return next(err); } // Error in API usage.
         if (results.author==null) { // No results.
