@@ -35,7 +35,7 @@ export default class AuthorList extends Component {
   }
 
   deleteAuthor(id) {
-    axios.delete('http://localhost:5000/authors/'+id)
+    axios.post('http://localhost:5000/catalog/author/'+id+'/delete')
       .then(response => { console.log(response.data)});
 
     this.setState({
