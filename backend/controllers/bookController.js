@@ -184,7 +184,7 @@ exports.book_delete_get = function(req, res) {
             res.redirect('/catalog/books');
         }
       //Successful, so send json
-        res.json( results.book );
+        res.json( results.book_instance );
     });};
 
 // Handle book delete on POST.

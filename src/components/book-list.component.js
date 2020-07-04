@@ -34,12 +34,17 @@ export default class BookList extends Component {
   }
 
   deleteBook(id) {
-    axios.post('http://localhost:5000/catalog/book/'+id+'/delete')
-      .then(response => { console.log(response.data)});
+      axios.get('http://localhost:5000/catalog/book/'+id+'/delete')
+      .then(response => { console.log(response.data);
+            if (response.data.length < 1) {
+                axios.post('http://localhost:5000/catalog/book/'+id+'/delete')
+                      .then(res => { console.log(res.data)});
 
-    this.setState({
-      books: this.state.books.filter(el => el._id !== id)
-    })
+                    this.setState({
+                      books: this.state.books.filter(el => el._id !== id)
+                    })
+            }
+      });
   }
 
   bookList() {
