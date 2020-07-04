@@ -34,7 +34,7 @@ export default class BookList extends Component {
   }
 
   deleteBook(id) {
-    axios.delete('http://localhost:5000/books/'+id)
+    axios.post('http://localhost:5000/catalog/book/'+id+'/delete')
       .then(response => { console.log(response.data)});
 
     this.setState({
