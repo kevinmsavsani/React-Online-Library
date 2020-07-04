@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/navbar.component.js";
@@ -29,21 +29,23 @@ function App() {
                 <SideNavbar />
                 <div class="col-sm-9">
                     <br/>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/catalog" exact component={Home} />
-                    <Route path="/catalog/authors" component={AuthorList} />
-                    <Route path="/catalog/author/create" component={CreateAuthor} />
-                    <Route path="/catalog/books" component={BookList} />
-                    <Route path="/catalog/book/create" component={CreateBook} />
-                    <Route path="/catalog/bookinstances" component={BookInstanceList} />
-                    <Route path="/catalog/bookinstance/create" component={CreateBookInstance} />
-                    <Route path="/catalog/genres" component={GenreList} />
-                    <Route path="/catalog/genre/create" component={CreateGenre} />
-                    <Route path="/catalog/genre/:id" component={GenreDetail} />
-                    <Route path="/catalog/book/:id" component={BookDetail} />
-                    <Route path="/catalog/author/:id" component={AuthorDetail} />
-                    <Route path="/catalog/bookinstance/:id" component={BookInstanceDetail} />
-                </div>
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/catalog" exact component={Home} />
+                        <Route path="/catalog/authors" component={AuthorList} />
+                        <Route path="/catalog/author/create" exact component={CreateAuthor} />
+                        <Route path="/catalog/books" component={BookList} />
+                        <Route path="/catalog/book/create" exact component={CreateBook} />
+                        <Route path="/catalog/bookinstances" component={BookInstanceList} />
+                        <Route path="/catalog/bookinstance/create" exact component={CreateBookInstance} />
+                        <Route path="/catalog/genres" component={GenreList} />
+                        <Route path="/catalog/genre/create" exact component={CreateGenre} />
+                        <Route path="/catalog/genre/:id" component={GenreDetail} />
+                        <Route path="/catalog/book/:id" component={BookDetail} />
+                        <Route path="/catalog/author/:id" component={AuthorDetail} />
+                        <Route path="/catalog/bookinstance/:id" component={BookInstanceDetail} />
+                    </Switch>
+                    </div>
             </div>
          </div>
      </div>
