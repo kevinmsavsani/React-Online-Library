@@ -33,9 +33,8 @@ export default class GenreList extends Component {
   }
 
   deleteGenre(id) {
-    axios.delete('http://localhost:5000/genres/'+id)
+    axios.post('http://localhost:5000/catalog/genre/delete/'+id)
       .then(response => { console.log(response.data)});
-
     this.setState({
       genres: this.state.genres.filter(el => el._id !== id)
     })
