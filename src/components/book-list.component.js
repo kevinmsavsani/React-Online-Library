@@ -5,7 +5,7 @@ import axios from 'axios';
 const Book = props => (
   <tr>
     <td>{props.book.title}</td>
-    <td>{props.book.summary}</td>
+    <td>{props.book.author.name}</td>
     <td>
       <Link to={"/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
     </td>
@@ -54,7 +54,7 @@ export default class BookList extends Component {
           <thead className="thead-light">
             <tr>
               <th>Name</th>
-              <th>Summary</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
           </thead>

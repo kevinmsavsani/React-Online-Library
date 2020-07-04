@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const BookInstance = props => (
   <tr>
+    <td>{props.bookInstance.book.title}</td>
     <td>{props.bookInstance.status}</td>
-    <td>{props.bookInstance.due_back}</td>
     <td>
       <Link to={"/edit/"+props.bookInstance._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBookInstance(props.bookInstance._id) }}>delete</a>
     </td>
@@ -53,8 +53,8 @@ export default class BookInstanceList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
+              <th>Book</th>
               <th>Status</th>
-              <th>Due_back</th>
               <th>Actions</th>
             </tr>
           </thead>
