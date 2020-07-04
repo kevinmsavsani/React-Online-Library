@@ -9,7 +9,7 @@ const Book = props => (
     </td>
     <td>{props.book.author.name}</td>
     <td>
-      <Link to={"/catalog/genre/edit/"+props.genre._id}>edit</Link> | <a href="#" onClick={() => { props.deleteGenre(props.genre._id) }}>delete</a>
+      <Link to={"/catalog/book/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
     </td>
   </tr>
 )
@@ -34,12 +34,17 @@ export default class GenreDetail extends Component {
   }
 
   deleteBook(id) {
-    axios.delete('http://localhost:5000/books/'+id)
-      .then(response => { console.log(response.data)});
+      axios.get('http://localhost:5000/catalog/book/'+id+'/delete')
+      .then(response => { console.log(response.data);
+            if (response.data.length < 1) {
+                axios.post('http://localhost:5000/catalog/book/'+id+'/delete')
+                      .then(res => { console.log(res.data)});
 
-    this.setState({
-      books: this.state.books.filter(el => el._id !== id)
-    })
+                    this.setState({
+                      books: this.state.books.filter(el => el._id !== id)
+                    })
+            }
+      });
   }
 
   bookList() {

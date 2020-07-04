@@ -107,7 +107,7 @@ exports.author_delete_get = function(req, res, next) {
             res.redirect('/catalog/authors');
         }
       //Successful, so send json
-    res.json( results.author );
+    res.json( results.authors_books );
     });
 
 };

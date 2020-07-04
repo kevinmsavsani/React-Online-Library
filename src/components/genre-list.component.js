@@ -33,11 +33,16 @@ export default class GenreList extends Component {
   }
 
   deleteGenre(id) {
-    axios.post('http://localhost:5000/catalog/genre/delete/'+id)
-      .then(response => { console.log(response.data)});
-    this.setState({
-      genres: this.state.genres.filter(el => el._id !== id)
-    })
+    axios.get('http://localhost:5000/catalog/genre/' + id)
+        .then(response => { console.log(response.data);
+              if (response.data.length < 1) {
+                  axios.post('http://localhost:5000/catalog/genre/delete/'+id)
+                        .then(res => { console.log(res.data)});
+                      this.setState({
+                        genres: this.state.genres.filter(el => el._id !== id)
+                      })
+              }
+        });
   }
 
   genreList() {

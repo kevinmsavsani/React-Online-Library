@@ -35,12 +35,18 @@ export default class AuthorList extends Component {
   }
 
   deleteAuthor(id) {
-    axios.post('http://localhost:5000/catalog/author/'+id+'/delete')
-      .then(response => { console.log(response.data)});
+     axios.get('http://localhost:5000/catalog/author/'+id+'/delete')
+          .then(response => { console.log(response.data);
+                if (response.data.length < 1) {
+                    axios.post('http://localhost:5000/catalog/author/'+id+'/delete')
+                          .then(response => { console.log(response.data)});
 
-    this.setState({
-      authors: this.state.authors.filter(el => el._id !== id)
-    })
+                        this.setState({
+                          authors: this.state.authors.filter(el => el._id !== id)
+                        })
+                }
+          });
+
   }
 
   authorList() {
