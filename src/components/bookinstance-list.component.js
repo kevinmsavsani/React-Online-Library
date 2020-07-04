@@ -7,7 +7,7 @@ const BookInstance = props => (
     <td><Link to={"/catalog/bookinstance/"+props.bookInstance._id}>{props.bookInstance.book.title}</Link></td>
     <td>{props.bookInstance.status}</td>
     <td>
-      <Link to={"/edit/"+props.bookInstance._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBookInstance(props.bookInstance._id) }}>delete</a>
+      <Link to={"/catalog/bookinstance/edit/"+props.bookInstance._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBookInstance(props.bookInstance._id) }}>delete</a>
     </td>
   </tr>
 )

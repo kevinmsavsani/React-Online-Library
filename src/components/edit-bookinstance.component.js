@@ -42,9 +42,19 @@ export default class UpdateBookInstance extends Component {
             console.log(error);
           })
 
-     this.setState({
-       status: 'Maintenance'
-     });
+        axios.get('http://localhost:5000/catalog/bookinstance/'+this.props.match.params.id)
+                 .then(response => {
+                   this.setState({
+                     book: response.data.book.title,
+                     imprint: response.data.imprint,
+                     status: response.data.status,
+                     date: new Date(response.data.due_back),
+                   })
+                 })
+                 .catch(function (error) {
+                   console.log(error);
+                 })
+
    }
 
    onChangeBook(e){
@@ -80,17 +90,16 @@ export default class UpdateBookInstance extends Component {
        due_back: this.state.date,
        status: this.state.status
      }
-     axios.post('http://localhost:5000/catalog/bookinstance/create', bookInstance)
-          .then(res => console.log(res.data));
-     console.log(bookInstance);
+     axios.post('http://localhost:5000/catalog/bookinstance/edit/'+this.props.match.params.id, bookInstance)
+      .then(res => console.log(res.data));
 
-     window.location = '/catalog/bookinstances';
+     window.location = '/catalog/bookinstance/'+this.props.match.params.id;
    }
 
    render() {
      return (
      <div>
-       <h3>Add Book Instance</h3>
+       <h3>Edit Book Instance</h3>
        <form onSubmit={this.onSubmit}>
          <div className="form-group">
            <label>Book: </label>
@@ -146,7 +155,7 @@ export default class UpdateBookInstance extends Component {
                </select>
              </div>
          <div className="form-group">
-           <input type="submit" value="Create Book Instance" className="btn btn-primary" />
+           <input type="submit" value="Edit Book Instance" className="btn btn-primary" />
          </div>
        </form>
      </div>
