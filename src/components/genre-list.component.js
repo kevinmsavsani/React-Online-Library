@@ -4,7 +4,9 @@ import axios from 'axios';
 
 const Genre = props => (
   <tr>
-    <td>{props.genre.name}</td>
+      <td>
+            <Link to={"/catalog/genre/"+props.genre._id}>{props.genre.name}</Link>
+      </td>
     <td>
       <Link to={"/edit/"+props.genre._id}>edit</Link> | <a href="#" onClick={() => { props.deleteGenre(props.genre._id) }}>delete</a>
     </td>
