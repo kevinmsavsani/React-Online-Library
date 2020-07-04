@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class UpdateBook extends Component {
+export default class EditBook extends Component {
     constructor(props) {
      super(props);
 
@@ -33,10 +33,8 @@ export default class UpdateBook extends Component {
            this.setState({
              authors: response.data.map(author => author.name),
              authorid: response.data.map(author => author._id),
-             author: response.data[0].name
            });
          }
-
        })
        .catch((error) => {
          console.log(error);
@@ -48,13 +46,26 @@ export default class UpdateBook extends Component {
                 this.setState({
                   genres: response.data.map(genre => genre.name),
                   genreid: response.data.map(genre => genre._id),
-                  genre: response.data[0].name
                 });
               }
             })
             .catch((error) => {
               console.log(error);
             })
+
+    axios.get('http://localhost:5000/catalog/book/'+this.props.match.params.id)
+             .then(response => {
+               this.setState({
+                 title: response.data.title,
+                 summary: response.data.summary,
+                 isbn: response.data.isbn,
+                 author: response.data.author.name,
+                 genre: response.data.genre.name,
+               })
+             })
+             .catch(function (error) {
+               console.log(error);
+             })
    }
 
    onChangeAuthor(e){
@@ -100,16 +111,16 @@ export default class UpdateBook extends Component {
 
      console.log(book);
 
-    axios.post('http://localhost:5000/catalog/book/create', book)
+     axios.post('http://localhost:5000/catalog/book/edit/'+this.props.match.params.id, book)
       .then(res => console.log(res.data));
 
-     window.location = '/catalog/books';
+     window.location = '/catalog/book/'+this.props.match.params.id;
    }
 
    render() {
      return (
      <div>
-       <h3>Add Book</h3>
+       <h3>Edit Book</h3>
        <form onSubmit={this.onSubmit}>
            <div className="form-group">
              <label>Title: </label>
@@ -174,7 +185,7 @@ export default class UpdateBook extends Component {
                </select>
              </div>
          <div className="form-group">
-           <input type="submit" value="Create Book" className="btn btn-primary" />
+           <input type="submit" value="Edit Book" className="btn btn-primary" />
          </div>
        </form>
      </div>

@@ -9,7 +9,7 @@ const Book = props => (
     </td>
     <td>{props.book.author.name}</td>
     <td>
-      <Link to={"/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
+      <Link to={"/catalog/book/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
     </td>
   </tr>
 )
