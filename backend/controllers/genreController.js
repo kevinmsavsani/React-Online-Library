@@ -212,7 +212,7 @@ exports.genre_update_post = [
                Genre.findByIdAndUpdate(req.params.id, genre, {}, function (err,thegenre) {
                     if (err) { return next(err); }
                        // Successful - redirect to book detail page.
-                       res.redirect(thegenre.url);
+                       res.json(thegenre.url);
                     }
                 );
 

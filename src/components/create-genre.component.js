@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 
-export default class UpdateGenre extends Component {
+export default class CreateGenre extends Component {
   constructor(props) {
     super(props);
 
