@@ -16,8 +16,7 @@ export default class CreateAuthor extends Component {
      this.state = {
        author: '',
        birthDate: new Date(),
-       deathDate: new Date(),
-       users: []
+       deathDate: new Date()
      };
    }
 

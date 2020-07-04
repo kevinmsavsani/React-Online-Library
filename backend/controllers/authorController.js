@@ -158,8 +158,7 @@ exports.author_update_get = function(req, res) {
 exports.author_update_post = [
 
      // Validate fields.
-     body('name').isLength({ min: 1 }).trim().withMessage('Name must be specified.')
-         .isAlphanumeric().withMessage('Name has non-alphanumeric characters.'),
+     body('name').isLength({ min: 1 }).trim().withMessage('Name must be specified.'),
      body('date_of_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
      body('date_of_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601(),
 
@@ -195,7 +194,7 @@ exports.author_update_post = [
                  Author.findByIdAndUpdate(req.params.id, author, {}, function (err,theauthor) {
                  if (err) { return next(err); }
                     // Successful - redirect to book detail page.
-                    res.redirect(theauthor.url);
+                    res.json(theauthor.url);
                  }
              );
          }

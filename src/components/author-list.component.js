@@ -10,7 +10,7 @@ const Author = props => (
     <td>{props.author.date_of_birth}</td>
     <td>{props.author.date_of_death}</td>
     <td>
-      <Link to={"/edit/"+props.author._id}>edit</Link> | <a href="#" onClick={() => { props.deleteAuthor(props.author._id) }}>delete</a>
+      <Link to={"/catalog/author/edit/"+props.author._id}>edit</Link> | <a href="#" onClick={() => { props.deleteAuthor(props.author._id) }}>delete</a>
     </td>
   </tr>
 )

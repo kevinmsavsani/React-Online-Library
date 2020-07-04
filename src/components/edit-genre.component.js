@@ -9,8 +9,7 @@ export default class EditGenre extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: '',
-      users: []
+      name: ''
     }
   }
 
