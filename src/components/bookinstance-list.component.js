@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const BookInstance = props => (
   <tr>
-    <td>{props.bookInstance.book.title}</td>
+    <td><Link to={"/catalog/bookinstance/"+props.bookInstance._id}>{props.bookInstance.book.title}</Link></td>
     <td>{props.bookInstance.status}</td>
     <td>
       <Link to={"/edit/"+props.bookInstance._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBookInstance(props.bookInstance._id) }}>delete</a>
