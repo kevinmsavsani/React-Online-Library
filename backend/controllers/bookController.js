@@ -214,7 +214,7 @@ exports.book_delete_post = function(req, res) {
                 Book.findByIdAndRemove(req.params.id, function deleteBook(err) {
                     if (err) { return next(err); }
                     // Success - go to author list
-                    res.json('book deleted')
+                    res.json('Book deleted')
                 })
             }
         });

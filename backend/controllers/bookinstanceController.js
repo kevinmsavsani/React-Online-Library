@@ -124,10 +124,10 @@ exports.bookinstance_delete_post = function(req, res) {
               err.status = 404;
               return next(err);
             }
-            BookInstance.findByIdAndRemove(req.body.id, function deleteBookInstance(err) {
+            BookInstance.findByIdAndRemove(req.params.id, function deleteBookInstance(err) {
                 if (err) { return next(err); }
                 // Success - go to author list
-                res.redirect('/catalog/bookinstances')
+                res.json('Bookinstances Deleted')
             })
         })
 };

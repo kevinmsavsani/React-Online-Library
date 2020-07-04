@@ -32,7 +32,7 @@ export default class BookInstanceList extends Component {
   }
 
   deleteBookInstance(id) {
-    axios.delete('http://localhost:5000/bookInstances/'+id)
+    axios.post('http://localhost:5000/catalog/bookinstance/'+id+'/delete')
       .then(response => { console.log(response.data)});
 
     this.setState({
